@@ -1,14 +1,19 @@
 <!doctype html>
 <html>
   <head>
+    <link href="http://cdn.foundation5.zurb.com/foundation.css" rel="stylesheet">
+<!--     <link rel="stylesheet" type="text/css" href="style.css"> -->
   </head>
   <body>
-  	EDIT
-  	<form method="post" action="/people">
-  		<input type="text" name="people[firstName]"><br>
-  		<input type="text" name="people[lastName]"><br>
-  		<submit>Edit</submit>
-
+	<div class="row">
+  <div class="small-4 small-centered columns">
+    <h1>EDIT</h1>
+		 <form action="/people/<%= person.id %>?_method=put" method="post">
+  		<input type="text" name="firstName"><br>
+  		<input type="text" name="lastName"><br>
+  		<input type="submit" value="Update Person">
   	</form>
+  </div>
+  </div>
   </body>
 </html>

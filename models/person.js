@@ -22,16 +22,17 @@ Person.all = function(callback){
 };
 
 Person.findBy = function(key, val, callback) {
-  db.query('SELECT * FROM people WHERE ' + key + '=$1',[val], function(err, res){
+ if (val === null) {
+  console.log('DOH! null ID')
+} else {
+   db.query('SELECT * FROM people WHERE ' + key + '=$1',[val], function(err, res){
     var foundRow, foundPerson;
-    console.log(val)
-    console.log(key)
-    console.log(res)
-      foundRow = res.rows[0];
+     foundRow = res.rows[0]; 
        person = new Person(foundRow);
-          console.log(foundPerson)
-            callback(err, person);
+        callback(err, person);
+   
   });
+ }
 };
 
 
@@ -80,8 +81,10 @@ Person.prototype.update = function(params, callback) {
   });
 }
 //need to use findBy to create it as an object to be able to destroy it
-Person.prototype.destroy = function(){
+Person.prototype.destroy = function(callback){
   db.query('DELETE FROM people WHERE id=$1', [this.id], function(err, res) {
+    callback(err);
+
   });
 }
 

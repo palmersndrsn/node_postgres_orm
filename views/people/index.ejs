@@ -1,13 +1,20 @@
 <!doctype html>
 <html>
   <head>
+    <link href="http://cdn.foundation5.zurb.com/foundation.css" rel="stylesheet">
+ <!--     <link rel="stylesheet" type="text/css" href="style.css"> -->
   </head>
-  <body>
-    People Index
-      <ul>
-	<% people.forEach(function (x) { %>
-		<li><a href="/people/<%= x.id %>"> <%= x.firstname + ' ' + x.lastname %></a> </li>
-		<% }) %>
-  </ul>
+    <body>
+      <div class="row">
+        <div class="small-4 small-centered columns">
+          <h1>People Index</h1>
+            <ul>
+              <% people.forEach(function (x) { %>
+                <li><a href="/people/<%= x.id %>"> <%= x.firstname + ' ' + x.lastname %></a> </li>
+                   <% }) %>
+            </ul>
+           <button><a href="/people/new">Create New Person</a></button>
+          </div>
+        </div>
   </body>
 </html>

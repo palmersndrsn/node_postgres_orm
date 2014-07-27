@@ -34,27 +34,43 @@ app.get("/people/:id", function(req,res){
 });
 
 //editing single person need
-app.get("/people/:id/edit", function(req,res){
-  res.render("people/edit", {person: {} });
+app.get("/people/edit/:id", function(req,res){
+  var currentId = req.params.id
+   res.render("people/edit");
 });
 
 
-
+// new person
 app.post("/people", function(req, res){
-
+ Person.create({firstname: req.body.firstName, lastname: req.body.lastName}, function(err, person){      
+   res.redirect("/people");
+  });
 });
 
 //destroy single person
 app.delete("/people/:id", function(req, res){
-  var id = req.params.id;
-    Person.destroy(function(err, id){
-      res.redirect("/people");
+  var currentId = req.params.id
+  console.log(currentId)
+    
+    Person.findBy('id',currentId, function(err, person) {
+       person.destroy(function(err) {
+          res.redirect("/people");
     });
+  });
 });
 
 
 app.put("/people/:id", function(req,res){
-  res.redirect("/people");
+ var currentId = req.params.id
+  
+  Person.findBy('id',currentId, function(err, person) {
+   var personUpdate = req.body.person;
+    console.log(personUpdate)
+
+     person.update({firstname: req.body.firstName, lastname: req.body.lastName}, function(err, person){      
+      res.redirect("/people");
+     });
+  });
 });
 
 app.listen(3000, function(){

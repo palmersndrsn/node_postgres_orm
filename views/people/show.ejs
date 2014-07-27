@@ -1,16 +1,18 @@
 <!doctype html>
 <html>
-  <head>
-  </head>
-  <body>
-Show
-
-
-		<h1> <%= person.firstname + ' ' + person.lastname %> </h1>
-			<form method="post" action="<%= person.id %>/edit">
-				<input type="hidden" value=" <%= person.id %>">
-				<input type="submit" value="Edit this Person">
-			</form>
-
+ <head>
+    <link href="http://cdn.foundation5.zurb.com/foundation.css" rel="stylesheet">
+<!--      <link rel="stylesheet" type="text/css" href="style.css"> -->
+ </head>
+ <body>
+	<div class="row">
+	  <div class="small-4 small-centered columns">
+	    <h1> <%= person.firstname + ' ' + person.lastname %> </h1>
+				<button><a href="edit/<%=person.id%>">Edit</a></button>
+					<form action="/people/<%= person.id %>?_method=delete" method="post">
+						<input type="submit" value="Delete this Person">
+					</form>
+				</div>
+			</div>
   </body>
 </html>

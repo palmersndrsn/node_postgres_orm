@@ -1,13 +1,20 @@
 <!doctype html>
 <html>
   <head>
+  
+  <link href="http://cdn.foundation5.zurb.com/foundation.css" rel="stylesheet">
+<!--    <link rel="stylesheet" type="text/css" href="style.css"> -->
   </head>
   <body>
-  	<form method="post" action="/people">
-  		<input type="text" name="people[firstName]"><br>
-  		<input type="text" name="people[lastName]"><br>
-  		<button>Create Person</button>
-
-  	</form>
+		<div class="row">
+		 <div class="small-4 small-centered columns">
+		  <h1>New Person</h1> 	
+		  	<form method="post" action="/people">
+		  		<input type="text" name="firstName"><br>
+		  		<input type="text" name="lastName"><br>
+		  		<button>Create Person</button>
+		  	</form>
+			</div>
+		</div>
   </body>
 </html>
