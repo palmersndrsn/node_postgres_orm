@@ -8,26 +8,42 @@ function Person(params) {
 
 
 Person.all = function(callback){
-  db.query("YOUR QUERY HERE",[], function(err, res){
+  db.query("SELECT * FROM people",[], function(err, res){
     var allPeople = [];
-    // do something here with res
+      if (err) {
+        console.log('DOH' + err);
+            } else {
+      res.rows.forEach(function(x){   
+        allPeople.push(new Person(x))
+        });
+      }
     callback(err, allPeople);
   });
-}
+};
 
 Person.findBy = function(key, val, callback) {
-  db.query("",[val], function(err, res){
+  db.query('SELECT * FROM people WHERE ' + key + '=$1',[val], function(err, res){
     var foundRow, foundPerson;
-    // do something here with res
-    callback(err, foundPerson);
+    console.log(val)
+    console.log(key)
+    console.log(res)
+      foundRow = res.rows[0];
+       person = new Person(foundRow);
+          console.log(foundPerson)
+            callback(err, person);
   });
 };
 
 
 
-Person.create = function(params, callback){
-  db.query("", [params.firstname, params.lastname], function(err, res){
+Person.create = function(params, callback) {
+  db.query("INSERT INTO people (firstname, lastname) VALUES ($1, $2) RETURNING * " , [params.firstname, params.lastname], function(err, res){
     var createdRow, newPerson;
+    createdRow = res.rows[0]
+    newPerson = new Person(createdRow);
+    console.log(createdRow)
+    console.log(newPerson)
+    //add create
     callback(err, newPerson);
   });
 };
@@ -54,7 +70,7 @@ Person.prototype.update = function(params, callback) {
   db.query(statement, values, function(err, res) {
     var updatedRow;
     if(err) {
-      console.error("OOP! Something went wrong!", err);
+      console.error("DOH! Something went wrong!", err);
     } else {
       updatedRow = res.rows[0];
       _this.firstname = updatedRow.firstname;
@@ -63,10 +79,9 @@ Person.prototype.update = function(params, callback) {
     callback(err, _this)
   });
 }
-
+//need to use findBy to create it as an object to be able to destroy it
 Person.prototype.destroy = function(){
-  db.query("", [this.id], function(err, res) {
-    callback(err)
+  db.query('DELETE FROM people WHERE id=$1', [this.id], function(err, res) {
   });
 }
 

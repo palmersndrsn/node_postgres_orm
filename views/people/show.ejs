@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+  <head>
+  </head>
+  <body>
+Show
+
+
+		<h1> <%= person.firstname + ' ' + person.lastname %> </h1>
+			<form method="post" action="<%= person.id %>/edit">
+				<input type="hidden" value=" <%= person.id %>">
+				<input type="submit" value="Edit this Person">
+			</form>
+
+  </body>
+</html>

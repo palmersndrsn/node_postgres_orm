@@ -4,6 +4,10 @@
   </head>
   <body>
     People Index
-
+      <ul>
+	<% people.forEach(function (x) { %>
+		<li><a href="/people/<%= x.id %>"> <%= x.firstname + ' ' + x.lastname %></a> </li>
+		<% }) %>
+  </ul>
   </body>
 </html>
