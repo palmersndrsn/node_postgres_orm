@@ -2,16 +2,22 @@
 <html>
  <head>
     <link href="http://cdn.foundation5.zurb.com/foundation.css" rel="stylesheet">
-<!--      <link rel="stylesheet" type="text/css" href="style.css"> -->
+   <link rel="stylesheet" type="text/css" href="/style/style.css">
  </head>
  <body>
 	<div class="row">
 	  <div class="small-4 small-centered columns">
 	    <h1> <%= person.firstname + ' ' + person.lastname %> </h1>
-				<button><a href="edit/<%=person.id%>">Edit</a></button>
+	    <ul class="button-group">
+				<li>
+				<button class="button"><a href="edit/<%=person.id%>">Edit</a></button>
+				</li>
+				<li>
 					<form action="/people/<%= person.id %>?_method=delete" method="post">
-						<input type="submit" value="Delete this Person">
+						<input class="button" type="submit" value="Delete this Person">
 					</form>
+					</li>
+					</ul>
 				</div>
 			</div>
   </body>
